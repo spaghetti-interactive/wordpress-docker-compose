@@ -1,18 +1,18 @@
 version: '3'
 
 services:
-  wp:
+  wp_website_spa_it:
     image: wordpress:latest # https://hub.docker.com/_/wordpress/
     ports:
       - ${IP}:3080:3080 # change ip if required
     volumes:
       - ./config/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
-      - ./wp-app:/var/www/html # Full wordpress project
+      - ./wp-app-website-spa-it:/var/www/html # Full wordpress project
       #- ./plugin-name/trunk/:/var/www/html/wp-content/plugins/plugin-name # Plugin development
       #- ./theme-name/trunk/:/var/www/html/wp-content/themes/theme-name # Theme development
     environment:
       WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_NAME: "${DB_NAME}"
+      WORDPRESS_DB_NAME: "wp-website-spa-it" #"${DB_NAME}"
       WORDPRESS_DB_USER: root
       WORDPRESS_DB_PASSWORD: "${DB_ROOT_PASSWORD}"
     depends_on:
@@ -20,19 +20,38 @@ services:
     links:
       - db
 
-  wpcli:
-    image: wordpress:cli
+  wp_www_spa_it:
+    image: wordpress:latest # https://hub.docker.com/_/wordpress/
+    ports:
+      - ${IP}:3081:3081 # change ip if required
     volumes:
       - ./config/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
-      - ./wp-app:/var/www/html
+      - ./wp-app-www-spa-it:/var/www/html # Full wordpress project
+      #- ./plugin-name/trunk/:/var/www/html/wp-content/plugins/plugin-name # Plugin development
+      #- ./theme-name/trunk/:/var/www/html/wp-content/themes/theme-name # Theme development
     environment:
       WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_NAME: "${DB_NAME}"
+      WORDPRESS_DB_NAME: "wp-www-spa-it" #"${DB_NAME}"
       WORDPRESS_DB_USER: root
       WORDPRESS_DB_PASSWORD: "${DB_ROOT_PASSWORD}"
     depends_on:
       - db
-      - wp
+    links:
+      - db
+
+  # wpcli:
+  #   image: wordpress:cli
+  #   volumes:
+  #     - ./config/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
+  #     - ./wp-app:/var/www/html
+  #   environment:
+  #     WORDPRESS_DB_HOST: db
+  #     WORDPRESS_DB_NAME: "${DB_NAME}"
+  #     WORDPRESS_DB_USER: root
+  #     WORDPRESS_DB_PASSWORD: "${DB_ROOT_PASSWORD}"
+  #   depends_on:
+  #     - db
+  #     - wp
 
   pma:
     image: phpmyadmin/phpmyadmin
@@ -42,7 +61,7 @@ services:
       PMA_PORT: 3306
       MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
     ports:
-      - ${IP}:3081:3081
+      - ${IP}:3079:3079
     links:
       - db:db
 
