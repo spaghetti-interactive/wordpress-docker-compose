@@ -41,13 +41,15 @@ services:
     image: phpmyadmin/phpmyadmin
     environment:
       # https://docs.phpmyadmin.net/en/latest/setup.html#docker-environment-variables
-      PMA_HOST: db
+      PMA_HOST: db_spaghetti_staging
       PMA_PORT: 3306
       MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
     ports:
       - ${IP}:3079:80
+    depends_on:
+      - db_spaghetti_staging
     links:
-      - db:db_spaghetti_staging
+      - db_spaghetti_staging
 
   db_spaghetti_staging:
     image: mariadb:latest # https://hub.docker.com/_/mysql/ - or mariadb https://hub.docker.com/_/mariadb
@@ -90,13 +92,15 @@ services:
     image: phpmyadmin/phpmyadmin
     environment:
       # https://docs.phpmyadmin.net/en/latest/setup.html#docker-environment-variables
-      PMA_HOST: db
+      PMA_HOST: db_spaghetti_production
       PMA_PORT: 3307
       MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
     ports:
       - ${IP}:3078:80
+    depends_on:
+      - db_spaghetti_production
     links:
-      - db:db_spaghetti_production
+      - db_spaghetti_production
 
   db_spaghetti_production:
     image: mariadb:latest # https://hub.docker.com/_/mysql/ - or mariadb https://hub.docker.com/_/mariadb
