@@ -33,7 +33,7 @@ services:
       #PMA_PASSWORD: "password"
       # PMA_PORT: 3307
       # MYSQL_DATABASE: "${DB_NAME}"
-      # MYSQL_ROOT_HOST: db_spaghetti_production
+      # MYSQL_ROOT_HOST: db_sativapiu_it
       # MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
     ports:
       - ${IP}:3080:80
@@ -44,7 +44,7 @@ services:
     # volumes:
     #   - db_data_spaghetti_production:/phpma
 
-  db_spaghetti_production:
+  db_sativapiu_it:
     image: mariadb:latest # https://hub.docker.com/_/mysql/ - or mariadb https://hub.docker.com/_/mariadb
     ports:
       - ${IP}:3308:3308 # change ip if required

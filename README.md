@@ -39,6 +39,10 @@ Open a terminal and `cd` to the folder in which `docker-compose.yml` is saved an
 
 ```
 docker-compose up
+
+or 
+
+docker-compose -f dockerfile.yml up
 ```
 
 This creates two new folders next to your `docker-compose.yml` file.
@@ -58,6 +62,10 @@ You can start the containers with the `up` command in daemon mode (by adding `-d
 
 ```
 docker-compose start
+
+or 
+
+docker-compose -f dockerfile.yml start
 ```
 
 ### Stopping containers
