@@ -1,3 +1,5 @@
+repo url: https://github.com/nezhar/wordpress-docker-compose
+
 # WPDC - WordPress Docker Compose
 
 Easy WordPress development with Docker and Docker Compose.
